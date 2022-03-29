@@ -5,10 +5,18 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { rootRouterConfig } from './app.router';
+import { HomeComponent } from './home/home.component';
+import { CreateComponent } from './create/create.component';
+import { UpdateComponent } from './update/update.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    CreateComponent,
+    UpdateComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,
