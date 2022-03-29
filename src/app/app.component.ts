@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OpenModalsService } from './services/open-modals.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'contact-list';
+
+  constructor(private modalService: OpenModalsService) { }
+
+  creationModal(){
+    this.modalService.openCreationModal();
+  }
+
+
 }

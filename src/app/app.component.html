@@ -12,7 +12,7 @@
       <div fxShow="true" fxHide.lt-md>
         <div>
 
-          <button class="mr-3 open-sans" [routerLink]="['/home']" mat-raised-button color="basic" style="font-weight: 600;">Novo contato</button>
+          <button class="mr-3 open-sans" (click)="creationModal();" mat-raised-button color="basic" style="font-weight: 600;">Novo contato</button>
 
           <button class="mr-3 open-sans" [routerLink]="['/about']" mat-raised-button color="basic" style="font-weight: 600;">Sobre o projeto</button>
 

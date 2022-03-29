@@ -1,6 +1,6 @@
 export class Contact{
   name!: string;
   email!: string;
-  number!: number;
+  number!: string;
   nickname!: string;
 }
