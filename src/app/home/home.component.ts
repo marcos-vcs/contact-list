@@ -13,7 +13,7 @@ export class HomeComponent{
 
   search: string = '';
   displayedColumns: string[] = ['name', 'nickname', 'email', 'number', 'actions'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Contact>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private modalService: OpenModalsService) { }
@@ -22,18 +22,11 @@ export class HomeComponent{
     this.dataSource.paginator = this.paginator
   }
 
-  delete(element: PeriodicElement){
+  delete(element: Contact){
     this.modalService.openDeleteModal(element);
   }
 
 
-}
-
-export interface PeriodicElement {
-  name: string;
-  email: string;
-  number: string;
-  nickname: string;
 }
 
 const ELEMENT_DATA: Contact[] = [
