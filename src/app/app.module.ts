@@ -17,6 +17,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import { getDutchPaginatorIntl } from './dutch-paginator-intl';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +35,10 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     FormsModule,
+    MatMenuModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
@@ -40,6 +50,7 @@ import { AboutComponent } from './about/about.component';
     [RouterModule.forRoot(rootRouterConfig, {useHash: true})]
   ],
   providers: [
+    { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() },
     {provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [AppComponent]

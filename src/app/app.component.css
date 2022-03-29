@@ -2,9 +2,7 @@
   flex: 1 1 auto;
 }
 #toolbar-bg{
-  background: #00C9FF;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #92FE9D, #00C9FF);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: radial-gradient( circle farthest-corner at 92.3% 71.5%,  rgba(134,231,214,1) 0%, rgba(83,138,214,1) 90% );
   color: #fff;
 }
 .open-sans {
