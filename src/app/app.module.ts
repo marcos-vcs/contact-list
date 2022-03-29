@@ -24,6 +24,7 @@ import { getDutchPaginatorIntl } from './dutch-paginator-intl';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+    NgxMaskModule.forRoot(),
     [RouterModule.forRoot(rootRouterConfig, {useHash: true})]
   ],
   providers: [

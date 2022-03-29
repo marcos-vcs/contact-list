@@ -1,1 +1,84 @@
-AQUI VAI TER O TAL DO MODAL DE CRIAÇÃO
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <button (click)="onDismiss();" class="float-right" mat-icon-button aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+
+      <div class="title">
+        Cadastro de novo contato
+      </div>
+
+      <form class="example-form" ngNativeValidation>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>Nome</mat-label>
+              <input [(ngModel)]="contact.name" name="name" type="text" matInput placeholder="Informe o nome">
+              <small *ngIf="!validName" class="mt-2" style="color: rgb(255, 0, 0);">
+                *Obrigatório
+              </small>
+              <small *ngIf="validName" class="mt-2" style="color: rgb(255, 0, 0);">
+                Nome informado e inválido!
+              </small>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>Telefone</mat-label>
+              <input [(ngModel)]="contact.number" name="number" mask="(00) 00000-0000" type="text" matInput placeholder="Informe um número de contato">
+              <small *ngIf="!validNumber" class="mt-2" style="color: rgb(255, 0, 0);">
+                *Obrigatório
+              </small>
+              <small *ngIf="validNumber" class="mt-2" style="color: rgb(255, 0, 0);">
+                Telefone informado e inválido!
+              </small>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>Apelido</mat-label>
+              <input [(ngModel)]="contact.nickname" name="nickname" type="text" matInput placeholder="Informe um apelido">
+              <small *ngIf="validNickName" class="mt-2" style="color: rgb(255, 0, 0);">
+                Apelido informado e inválido!
+              </small>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input [(ngModel)]="contact.email" name="email" type="email" matInput placeholder="Informe o email">
+              <small *ngIf="validEmail" class="mt-2" style="color: rgb(255, 0, 0);">
+                E-mail informado e inválido!
+              </small>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button (click)="validForm()" mat-raised-button color="primary">
+          Salvar
+        </button>
+
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

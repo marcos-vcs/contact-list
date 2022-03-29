@@ -18,7 +18,7 @@ export class OpenModalsService {
   openCreationModal(){
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '500px',
-      height: '500px'
+      height: '90vh'
       }
     );
 
