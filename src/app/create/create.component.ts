@@ -64,6 +64,11 @@ export class CreateComponent{
   }
 
   private create(contact: Contact){
+    if(this.data.isNew){
+      //e um novo contato
+    }else{
+      //editar contato
+    }
 
   }
 

@@ -4,7 +4,7 @@
       <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
         <mat-icon>menu</mat-icon>
       </button>
-      <span>
+      <span [routerLink]="['/home']" style="cursor: pointer;">
         <img src="../../../assets/calendario.png" alt="best property" width="50vw">
         <span class="pattern-font font-weight-bold ml-3 ">Minha agenda</span>
       </span>
@@ -14,7 +14,7 @@
 
           <button class="mr-3 open-sans" (click)="creationModal();" mat-raised-button color="basic" style="font-weight: 600;">Novo contato</button>
 
-          <button class="mr-3 open-sans" [routerLink]="['/about']" mat-raised-button color="basic" style="font-weight: 600;">Sobre o projeto</button>
+          <button class="mr-3 open-sans" (click)="aboutModal()" mat-raised-button color="basic" style="font-weight: 600;">Sobre o projeto</button>
 
         </div>
       </div>
@@ -25,10 +25,10 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
         <div>
-          <button class="my-3 open-sans w-100" [routerLink]="['/home']" mat-raised-button color="basic" style="font-weight: 600;">Novo contato</button>
+          <button class="my-3 open-sans w-100" (click)="creationModal();" mat-raised-button color="basic" style="font-weight: 600;">Novo contato</button>
         </div>
         <div>
-          <button class="open-sans w-100" [routerLink]="['/about']" mat-raised-button color="basic" style="font-weight: 600;">Sobre o projeto</button>
+          <button class="open-sans w-100" (click)="aboutModal()" mat-raised-button color="basic" style="font-weight: 600;">Sobre o projeto</button>
         </div>
       </mat-nav-list>
     </mat-sidenav>

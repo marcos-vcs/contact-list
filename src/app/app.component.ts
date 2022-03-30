@@ -15,5 +15,9 @@ export class AppComponent {
     this.modalService.openCreationModal();
   }
 
+  aboutModal(){
+    this.modalService.openAboutModal();
+  }
+
 
 }

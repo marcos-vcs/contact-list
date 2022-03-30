@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AboutComponent } from '../about/about.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { CreateComponent } from '../create/create.component';
 import { Contact } from '../models/contact';
@@ -34,8 +35,8 @@ export class OpenModalsService {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      }
+
+    }
     );
   }
 
@@ -51,8 +52,8 @@ export class OpenModalsService {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      }
+
+    }
     );
   }
 
@@ -72,6 +73,20 @@ export class OpenModalsService {
         this.crudService.delete(contact);
       }
     });
+
+  }
+
+  openAboutModal(){
+    const dialogRef = this.dialog.open(AboutComponent, {
+      maxWidth: '500px',
+      maxHeight: '90vh',
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      }
+    );
 
   }
 
