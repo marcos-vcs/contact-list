@@ -1,0 +1,11 @@
+.footer{
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+.footer-icon{
+  font-size: 35px;
+  text-decoration: none;
+  color: #000;
+}

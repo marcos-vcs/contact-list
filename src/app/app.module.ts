@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { rootRouterConfig } from './app.router';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
-import { UpdateComponent } from './update/update.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,13 +25,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { NgxMaskModule } from 'ngx-mask';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CreateComponent,
-    UpdateComponent,
     AboutComponent,
     ConfirmDialogComponent
   ],
