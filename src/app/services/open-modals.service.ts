@@ -13,12 +13,40 @@ export class OpenModalsService {
 
   constructor(
     public dialog: MatDialog,
-    private crudService: ApiCommunicationService) { }
+    private crudService: ApiCommunicationService) {}
 
   openCreationModal(){
+    var contact : Contact = {
+      email: '',
+      name: '',
+      nickname: '',
+      number: ''
+    }
+
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '500px',
-      height: '90vh'
+      height: '90vh',
+      data: {
+        contact: contact,
+        isNew: true
+        }
+      }
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      }
+    );
+  }
+
+  openEditModal(contact: Contact){
+    const dialogRef = this.dialog.open(CreateComponent, {
+      width: '500px',
+      height: '90vh',
+      data: {
+        contact: contact,
+        isNew: false
+        }
       }
     );
 

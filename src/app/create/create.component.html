@@ -11,8 +11,11 @@
   <div class="row">
     <div class="col">
 
-      <div class="title">
+      <div *ngIf="data.isNew" class="title">
         Cadastro de novo contato
+      </div>
+      <div *ngIf="!data.isNew" class="title">
+        Editar contato
       </div>
 
       <form class="example-form" ngNativeValidation>
@@ -21,7 +24,7 @@
           <div class="col">
             <mat-form-field class="w-100" appearance="fill">
               <mat-label>Nome</mat-label>
-              <input [(ngModel)]="contact.name" name="name" type="text" matInput placeholder="Informe o nome">
+              <input [(ngModel)]="data.contact.name" name="name" type="text" matInput placeholder="Informe o nome">
               <small *ngIf="!validName" class="mt-2" style="color: rgb(255, 0, 0);">
                 *Obrigatório
               </small>
@@ -36,7 +39,7 @@
           <div class="col">
             <mat-form-field class="w-100" appearance="fill">
               <mat-label>Telefone</mat-label>
-              <input [(ngModel)]="contact.number" name="number" mask="(00) 00000-0000" type="text" matInput placeholder="Informe um número de contato">
+              <input [(ngModel)]="data.contact.number" name="number" mask="(00) 00000-0000" type="text" matInput placeholder="Informe um número de contato">
               <small *ngIf="!validNumber" class="mt-2" style="color: rgb(255, 0, 0);">
                 *Obrigatório
               </small>
@@ -51,7 +54,7 @@
           <div class="col">
             <mat-form-field class="w-100" appearance="fill">
               <mat-label>Apelido</mat-label>
-              <input [(ngModel)]="contact.nickname" name="nickname" type="text" matInput placeholder="Informe um apelido">
+              <input [(ngModel)]="data.contact.nickname" name="nickname" type="text" matInput placeholder="Informe um apelido">
               <small *ngIf="validNickName" class="mt-2" style="color: rgb(255, 0, 0);">
                 Apelido informado e inválido!
               </small>
@@ -63,7 +66,7 @@
           <div class="col">
             <mat-form-field class="w-100" appearance="fill">
               <mat-label>Email</mat-label>
-              <input [(ngModel)]="contact.email" name="email" type="email" matInput placeholder="Informe o email">
+              <input [(ngModel)]="data.contact.email" name="email" type="email" matInput placeholder="Informe o email">
               <small *ngIf="validEmail" class="mt-2" style="color: rgb(255, 0, 0);">
                 E-mail informado e inválido!
               </small>
@@ -71,10 +74,12 @@
           </div>
         </div>
 
-        <button (click)="validForm()" mat-raised-button color="primary">
+        <button *ngIf="data.isNew" (click)="validForm()" mat-raised-button color="primary">
           Salvar
         </button>
-
+        <button *ngIf="!data.isNew" (click)="validForm()" mat-raised-button color="primary">
+          Editar
+        </button>
 
       </form>
 

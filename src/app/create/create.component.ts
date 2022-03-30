@@ -1,30 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../models/contact';
+
+export interface DialogData {
+  contact: Contact;
+  isNew: boolean;
+}
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent{
 
-  contact: Contact = {
-    name: "",
-    number: "",
-    nickname: "",
-    email: ""
-  };
   validName: boolean = false;
   validNumber: boolean = false;
   validEmail: boolean = false;
   validNickName: boolean = false;
 
-  constructor(public dialogRef: MatDialogRef<CreateComponent>) { }
-
-
-  ngOnInit(): void {
-  }
+  constructor(
+    public dialogRef: MatDialogRef<CreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    }
 
   validForm(){
 
@@ -32,25 +30,25 @@ export class CreateComponent implements OnInit {
 
     var isValid = false;
 
-    if(this.contact.name.length < 3 || this.contact.name.length > 50){
+    if(this.data.contact.name.length < 3 || this.data.contact.name.length > 50){
       this.validName = true;
       isValid = true;
     }else{
       this.validName = false;
     }
-    if(this.contact.number.length !== 11){
+    if(this.data.contact.number.length !== 11){
       this.validNumber = true;
       isValid = true;
     }else{
       this.validNumber = false;
     }
-    if(this.contact.nickname.length != 0 && this.contact.nickname.length < 3 || this.contact.nickname.length > 50){
+    if(this.data.contact.nickname.length != 0 && this.data.contact.nickname.length < 3 || this.data.contact.nickname.length > 50){
       this.validNickName = true;
       isValid = true;
     }else{
       this.validNickName = false;
     }
-    if(!regexEmail.test(this.contact.email)){
+    if((this.data.contact.email.length != 0 && this.data.contact.email.length < 3 || this.data.contact.email.length > 50) && !regexEmail.test(this.data.contact.email)){
       this.validEmail = true;
       isValid = true;
     }else{
@@ -59,7 +57,7 @@ export class CreateComponent implements OnInit {
 
     if(!isValid){
       console.log("criando...");
-      this.create(this.contact);
+      this.create(this.data.contact);
       this.onDismiss();
     }
 

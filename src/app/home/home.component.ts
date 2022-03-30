@@ -22,6 +22,10 @@ export class HomeComponent{
     this.dataSource.paginator = this.paginator
   }
 
+  update(element: Contact){
+    this.modalService.openEditModal(element);
+  }
+
   delete(element: Contact){
     this.modalService.openDeleteModal(element);
   }
