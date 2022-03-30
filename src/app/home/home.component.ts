@@ -11,6 +11,7 @@ import { OpenModalsService } from '../services/open-modals.service';
 })
 export class HomeComponent{
 
+  activeFilter: string = 'NAME';
   search: string = '';
   displayedColumns: string[] = ['name', 'nickname', 'email', 'number', 'actions'];
   dataSource = new MatTableDataSource<Contact>(ELEMENT_DATA);
@@ -28,6 +29,22 @@ export class HomeComponent{
 
   delete(element: Contact){
     this.modalService.openDeleteModal(element);
+  }
+
+  activeFilterName(){
+    this.activeFilter = 'NAME';
+  }
+
+  activeFilterNickname(){
+    this.activeFilter = 'NICKNAME';
+  }
+
+  activeFilterEmail(){
+    this.activeFilter = 'EMAIL';
+  }
+
+  activeFilterNumber(){
+    this.activeFilter = 'NUMBER';
   }
 
 
