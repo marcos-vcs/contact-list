@@ -63,7 +63,7 @@ export class OpenModalsService {
     const dialogData = new ConfirmDialogModel(title, message);
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '500px',
+      width: '500px',
       data: dialogData
       }
     );
@@ -78,7 +78,7 @@ export class OpenModalsService {
 
   openAboutModal(){
     const dialogRef = this.dialog.open(AboutComponent, {
-      maxWidth: '500px',
+      width: '500px',
       maxHeight: '90vh',
       }
     );

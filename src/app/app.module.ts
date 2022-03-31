@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,6 +34,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ConfirmDialogComponent
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     MatDialogModule,
     MatMenuModule,

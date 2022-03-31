@@ -23,7 +23,14 @@
           </div>
         </div>
 
-        <table mat-table [dataSource]="dataSource">
+        <div class="row" *ngIf="dataSource.data.length === 0">
+          <div id="not-found">
+            <img src="../../assets/to-do.png" alt="nada encontrado" width="80%">
+            <div>Nada encontrado por aqui :(</div>
+          </div>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0">
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
@@ -66,11 +73,11 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+<!--         <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                        showFirstLastButtons
                        aria-label="Selecionar página de elementos periódicos">
         </mat-paginator>
-
+ -->
       </div>
     </div>
     <div class="col-1"></div>

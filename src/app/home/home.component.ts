@@ -2,6 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { Contact } from '../models/contact';
+import { ApiCommunicationService } from '../services/api-communication.service';
 import { OpenModalsService } from '../services/open-modals.service';
 
 @Component({
@@ -17,10 +18,27 @@ export class HomeComponent{
   dataSource = new MatTableDataSource<Contact>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private modalService: OpenModalsService) { }
+  constructor(
+    private modalService: OpenModalsService,
+    private apiRequest: ApiCommunicationService) { }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
+    this.dataSource.paginator = this.paginator;
+    this.read();
+    if(this.dataSource.data.length > 0){
+
+    }
+  }
+
+  read(){
+    this.apiRequest.read().subscribe(
+      (data) => {
+        this.dataSource.data = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   update(element: Contact){
@@ -50,26 +68,4 @@ export class HomeComponent{
 
 }
 
-const ELEMENT_DATA: Contact[] = [
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'},
-  {name: 'Nome do contato', email: 'email@email.com',  number: '62999999999', nickname: 'nickname'}
-];
+const ELEMENT_DATA: Contact[] = [];

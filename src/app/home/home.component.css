@@ -2,3 +2,14 @@ table {
   width: 100%;
 }
 
+#not-found{
+  color: rgb(66, 66, 66);
+  padding: 30px;
+  margin-bottom: 20px;
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+  margin: auto;
+  text-align: center;
+  font-size: 27px;
+  font-weight: 600;
+}
+
