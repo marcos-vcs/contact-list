@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-1"></div>
-    <div class="col-10 my-3">
+    <div class="col-md-10 my-3">
       <div class="mat-elevation-z8">
 
         <div class="row">
@@ -31,49 +31,50 @@
             <div>Nada encontrado por aqui :(</div>
           </div>
         </div>
+        <div class="table-responsive">
+          <table  mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0">
 
-        <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length > 0">
+            <!-- Name Column -->
+            <ng-container class="tr" matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Nome </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
+            <!-- Nickname Column -->
+            <ng-container class="tr" matColumnDef="nickname">
+              <th mat-header-cell *matHeaderCellDef> Apelido </th>
+              <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
+            </ng-container>
 
-          <!-- Nickname Column -->
-          <ng-container matColumnDef="nickname">
-            <th mat-header-cell *matHeaderCellDef> Apelido </th>
-            <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
-          </ng-container>
+            <!-- Email Column -->
+            <ng-container class="tr" matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> E-mail </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
 
-          <!-- Email Column -->
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> E-mail </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-          </ng-container>
+            <!-- Phone Column -->
+            <ng-container class="tr" matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef> Telefone </th>
+              <td mat-cell *matCellDef="let element"> {{element.number | mask: '(99) 99999-9999'}} </td>
+            </ng-container>
 
-          <!-- Phone Column -->
-          <ng-container matColumnDef="number">
-            <th mat-header-cell *matHeaderCellDef> Telefone </th>
-            <td mat-cell *matCellDef="let element"> {{element.number | mask: '(99) 99999-9999'}} </td>
-          </ng-container>
+            <!-- Actions Column -->
+            <ng-container class="tr" matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Opções </th>
+              <td mat-cell *matCellDef="let element">
+                <button (click)="update(element)" mat-icon-button aria-label="Editar">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="delete(element)" mat-icon-button aria-label="Excluir">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-          <!-- Actions Column -->
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Opções </th>
-            <td mat-cell *matCellDef="let element">
-              <button (click)="update(element)" mat-icon-button aria-label="Editar">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button (click)="delete(element)" mat-icon-button aria-label="Excluir">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
 
 <!--         <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                        showFirstLastButtons

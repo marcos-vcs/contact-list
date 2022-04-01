@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api/v1/contact'
+  apiUrl: 'http://appcontactbook-env-1.eba-yu3atmmb.us-east-1.elasticbeanstalk.com/api/v1/contact'
 };
 
 /*
