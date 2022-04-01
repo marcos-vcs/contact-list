@@ -15,7 +15,7 @@ export class HomeComponent{
   isLoad: boolean = true;
   activeFilter: string = 'NAME';
   search: string = '';
-  displayedColumns: string[] = ['name', 'nickname', 'email', 'number', 'actions'];
+  displayedColumns: string[] = ['name', 'number', 'email', 'nickname', 'actions'];
   dataSource = new MatTableDataSource<Contact>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

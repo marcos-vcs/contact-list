@@ -29,6 +29,7 @@ export class OpenModalsService {
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '500px',
       height: '90vh',
+      disableClose: true,
       data: {
         contact: contact,
         isNew: true
@@ -46,6 +47,7 @@ export class OpenModalsService {
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '500px',
       height: '90vh',
+      disableClose: true,
       data: {
         contact: contact,
         isNew: false

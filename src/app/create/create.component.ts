@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../models/contact';
 import { ApiCommunicationService } from '../services/api-communication.service';
+import { OpenModalsService } from '../services/open-modals.service';
 
 export interface DialogData {
   contact: Contact;
@@ -21,6 +22,7 @@ export class CreateComponent{
   validNickName: boolean = false;
 
   constructor(
+    private modalService: OpenModalsService,
     private apiService: ApiCommunicationService,
     public dialogRef: MatDialogRef<CreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
@@ -30,35 +32,38 @@ export class CreateComponent{
 
     const regexEmail = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
 
-    var isValid = false;
+    var isValid = true;
 
-    if(this.data.contact.name.length < 3 || this.data.contact.name.length > 50){
+    if(this.data.contact.name.length < 4 || this.data.contact.name.length > 50){
       this.validName = true;
-      isValid = true;
+      isValid = false;
     }else{
       this.validName = false;
     }
+
     if(this.data.contact.number.length !== 11){
       this.validNumber = true;
-      isValid = true;
+      isValid = false;
     }else{
       this.validNumber = false;
     }
+
     if(this.data.contact.nickname.length != 0 && this.data.contact.nickname.length < 3 || this.data.contact.nickname.length > 50){
       this.validNickName = true;
-      isValid = true;
+      isValid = false;
     }else{
       this.validNickName = false;
     }
-    if((this.data.contact.email.length != 0 && this.data.contact.email.length < 3 || this.data.contact.email.length > 50) && !regexEmail.test(this.data.contact.email)){
+
+    if(!regexEmail.test(this.data.contact.email) && this.data.contact.email.length != 0 ){
+      console.log(this.data.contact.email);
       this.validEmail = true;
-      isValid = true;
+      isValid = false;
     }else{
       this.validEmail = false;
     }
 
-    if(!isValid){
-      console.log("criando...");
+    if(isValid){
       this.create(this.data.contact);
       this.onDismiss();
     }
@@ -66,22 +71,65 @@ export class CreateComponent{
   }
 
   private create(contact: Contact){
+
     if(this.data.isNew){
       this.apiService.create(contact).subscribe(
         (data) => {
-          location.reload();
+          console.log(data);
+          debugger;
+          this.modalService.openSnackbarSuccess("Contato criado com sucesso!");
+          setTimeout(() => {
+            location.reload();
+          },3000);
         },
         (error) => {
-          location.reload();
+
+          console.log(error);
+          if(error.error.arguments.email){
+            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.email);
+          }else if(error.error.arguments.name){
+            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.name);
+          }else if(error.error.arguments.number){
+            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.number);
+          }else if(error.error.arguments.nickname){
+            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.nickname);
+          }
+          else{
+            this.modalService.openSnackbarAlert("Não foi possível criar o contato!");
+          }
+
+          debugger;
+          setTimeout(() => {
+            location.reload();
+          },3000);
+
         }
       );
     }else{
       this.apiService.update(contact).subscribe(
         (data) => {
-          location.reload();
+          this.modalService.openSnackbarSuccess("Contato atualizado com sucesso!");
+          setTimeout(() => {
+            location.reload();
+          },3000);
         },
         (error) => {
-          location.reload();
+          if(error.error.arguments.email){
+            this.modalService.openSnackbarAlert("Erro ao atualizar contato: " +  error.error.arguments.email);
+          }else if(error.error.arguments.name){
+            this.modalService.openSnackbarAlert("Erro ao atualizar contato: " +  error.error.arguments.name);
+          }else if(error.error.arguments.number){
+            this.modalService.openSnackbarAlert("Erro ao atualizar contato: " +  error.error.arguments.number);
+          }else if(error.error.arguments.nickname){
+            this.modalService.openSnackbarAlert("Erro ao atualizar contato: " +  error.error.arguments.nickname);
+          }
+          else{
+            this.modalService.openSnackbarAlert("Não foi possível atualizar o contato!");
+          }
+
+          setTimeout(() => {
+            location.reload();
+          },3000);
         }
       );
     }
