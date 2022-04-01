@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Contact } from '../models/contact';
+import { ApiCommunicationService } from '../services/api-communication.service';
 
 export interface DialogData {
   contact: Contact;
@@ -20,6 +21,7 @@ export class CreateComponent{
   validNickName: boolean = false;
 
   constructor(
+    private apiService: ApiCommunicationService,
     public dialogRef: MatDialogRef<CreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     }
@@ -65,9 +67,23 @@ export class CreateComponent{
 
   private create(contact: Contact){
     if(this.data.isNew){
-      //e um novo contato
+      this.apiService.create(contact).subscribe(
+        (data) => {
+          location.reload();
+        },
+        (error) => {
+          location.reload();
+        }
+      );
     }else{
-      //editar contato
+      this.apiService.update(contact).subscribe(
+        (data) => {
+          location.reload();
+        },
+        (error) => {
+          location.reload();
+        }
+      );
     }
 
   }

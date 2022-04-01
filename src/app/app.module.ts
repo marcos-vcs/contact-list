@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,6 +24,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { NgxMaskModule } from 'ngx-mask';
     ConfirmDialogComponent
   ],
   imports: [
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
     HttpClientModule,
     FormsModule,
     MatDialogModule,

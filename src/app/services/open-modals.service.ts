@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AboutComponent } from '../about/about.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { CreateComponent } from '../create/create.component';
@@ -13,6 +14,7 @@ export class OpenModalsService {
 
 
   constructor(
+    private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private crudService: ApiCommunicationService) {}
 
@@ -57,7 +59,7 @@ export class OpenModalsService {
     );
   }
 
-  openDeleteModal(contact: Contact){
+  openDeleteModal(id: number){
     const title = 'Tem certeza que deseja excluir?';
     const message = 'Caso prossiga o contato não poderá ser recuperado, realmente tem certeza que deseja continuar?';
     const dialogData = new ConfirmDialogModel(title, message);
@@ -70,7 +72,18 @@ export class OpenModalsService {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       if(dialogResult){
-        this.crudService.delete(contact);
+        this.crudService.delete(id).subscribe(
+          (data) => {
+
+              this.openSnackbarSuccess('Contato excluído com sucesso!');
+              setTimeout(() => {location.reload();}, 2000);
+
+          },
+          (error) => {
+            console.log(error);
+            this.openSnackbarAlert('Erro ao excluir contato!');
+          }
+        );
       }
     });
 
@@ -88,6 +101,23 @@ export class OpenModalsService {
       }
     );
 
+  }
+
+  openSnackbarAlert(msg: string){
+    this._snackBar.open(msg, 'Fechar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 5000,
+      panelClass: ['red-snackbar','login-snackbar']
+    });
+  }
+  openSnackbarSuccess(msg: string){
+    this._snackBar.open(msg, 'Fechar', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 5000,
+      panelClass: ['green-snackbar','login-snackbar']
+    });
   }
 
 }

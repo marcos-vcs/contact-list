@@ -17,11 +17,13 @@
 
             <mat-form-field class="ml-5" style="width: 40%;">
               <span matPrefix></span>
-              <input type="text" matInput placeholder="Buscar" name= "search" [(ngModel)]= "search">
-              <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+              <input type="text" (blur)="filter()"  matInput placeholder="Buscar" name= "search" [(ngModel)]= "search">
+              <button (click)="filter()" matSuffix mat-button><mat-icon >search</mat-icon></button>
               </mat-form-field>
           </div>
         </div>
+
+        <mat-spinner *ngIf="isLoad" class="my-4" style="margin:0 auto;"></mat-spinner>
 
         <div class="row" *ngIf="dataSource.data.length === 0">
           <div id="not-found">

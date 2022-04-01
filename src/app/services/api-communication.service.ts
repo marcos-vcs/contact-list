@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Contact } from '../models/contact';
+import { environment } from 'src/environments/environment';
+import { Contact, ContactWithId } from '../models/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,25 @@ export class ApiCommunicationService {
 
   constructor(private http: HttpClient) { }
 
-  create(contact: Contact){
-    console.log('criando...');
+  create(contact: Contact) : Observable<ContactWithId> {
+    return this.http.post<ContactWithId>(environment.apiUrl, contact);
   }
 
-  read() : Observable<Contact[]> {
-    return this.http.get<Contact[]>('http://localhost:8080/api/v1/contact');
+  update(contact: Contact) : Observable<ContactWithId> {
+    return this.http.put<ContactWithId>(`${environment.apiUrl}`, contact);
   }
 
-  delete(contact: Contact){
-    console.log(`deletando ${contact.name}...`);
+  readWithFilter(filter: string, value: string) : Observable<ContactWithId[]> {
+    return this.http.get<ContactWithId[]>(
+      `${environment.apiUrl}/filter?filterType=${filter}&filterValue=${value}`);
+  }
+
+  read() : Observable<ContactWithId[]> {
+    return this.http.get<ContactWithId[]>(environment.apiUrl);
+  }
+
+  delete(id: number){
+    return this.http.delete<Contact>(`${environment.apiUrl}/${id}`);
   }
 
 

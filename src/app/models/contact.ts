@@ -4,3 +4,7 @@ export class Contact{
   number!: string;
   nickname!: string;
 }
+
+export class ContactWithId extends Contact{
+  id!: number;
+}
