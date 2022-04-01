@@ -32,5 +32,4 @@ export class ApiCommunicationService {
     return this.http.delete<Contact>(`${environment.apiUrl}/${id}`);
   }
 
-
 }
