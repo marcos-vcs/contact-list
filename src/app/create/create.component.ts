@@ -75,8 +75,6 @@ export class CreateComponent{
     if(this.data.isNew){
       this.apiService.create(contact).subscribe(
         (data) => {
-          console.log(data);
-          debugger;
           this.modalService.openSnackbarSuccess("Contato criado com sucesso!");
           setTimeout(() => {
             location.reload();

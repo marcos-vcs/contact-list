@@ -17,7 +17,7 @@
 
             <mat-form-field class="ml-5" style="width: 40%;">
               <span matPrefix></span>
-              <input type="text" (blur)="filter()"  matInput placeholder="Buscar" name= "search" [(ngModel)]= "search">
+              <input type="text" (keydown)="enterFilter($event)"  matInput placeholder="Buscar" name= "search" [(ngModel)]= "search">
               <button (click)="filter()" matSuffix mat-button><mat-icon >search</mat-icon></button>
               </mat-form-field>
           </div>
@@ -25,7 +25,7 @@
 
         <mat-spinner *ngIf="isLoad" class="my-4" style="margin:0 auto;"></mat-spinner>
 
-        <div class="row" *ngIf="dataSource.data.length === 0">
+        <div class="row" *ngIf="notfound">
           <div id="not-found">
             <img src="../../assets/to-do.png" alt="nada encontrado" width="80%">
             <div>Nada encontrado por aqui :(</div>
@@ -37,7 +37,7 @@
             <!-- Name Column -->
             <ng-container class="tr" matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef> Nome </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.name | titlecase}} </td>
             </ng-container>
 
             <!-- Phone Column -->
@@ -49,7 +49,7 @@
             <!-- Nickname Column -->
             <ng-container class="tr" matColumnDef="nickname">
               <th mat-header-cell *matHeaderCellDef> Apelido </th>
-              <td mat-cell *matCellDef="let element"> {{element.nickname}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.nickname | titlecase}} </td>
             </ng-container>
 
             <!-- Email Column -->

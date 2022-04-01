@@ -13,6 +13,7 @@ import { OpenModalsService } from '../services/open-modals.service';
 export class HomeComponent{
 
   isLoad: boolean = true;
+  notfound: boolean = false;
   activeFilter: string = 'NAME';
   search: string = '';
   displayedColumns: string[] = ['name', 'number', 'email', 'nickname', 'actions'];
@@ -26,6 +27,12 @@ export class HomeComponent{
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.read();
+  }
+
+  enterFilter(event: any){
+    if(event.keyCode === 13){
+      this.filter();
+    }
   }
 
   filter(){
@@ -56,14 +63,20 @@ export class HomeComponent{
 
   read(){
     this.isLoad = true;
+    this.notfound = false;
     this.apiRequest.read().subscribe(
       (data) => {
         this.modalService.openSnackbarSuccess("Contatos carregados com sucesso!");
         this.dataSource.data = data;
         this.isLoad = false;
+        if(this.dataSource.data.length === 0){
+          this.notfound = true;
+        }
+
       },
       (error) => {
         console.log(error);
+        this.notfound = true;
         this.isLoad = false;
           this.modalService.openSnackbarAlert('Erro ao carregar contatos!');
       }
