@@ -44,6 +44,7 @@ export class OpenModalsService {
   }
 
   openEditModal(contact: Contact){
+
     const dialogRef = this.dialog.open(CreateComponent, {
       width: '500px',
       height: '90vh',

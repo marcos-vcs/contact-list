@@ -29,9 +29,9 @@ export class CreateComponent{
     }
 
   validForm(){
+    console.log(this.data);
 
     const regexEmail = new RegExp("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$");
-
     var isValid = true;
 
     if(this.data.contact.name.length < 4 || this.data.contact.name.length > 50){
@@ -64,46 +64,52 @@ export class CreateComponent{
     }
 
     if(isValid){
+      if(this.data.isNew){
       this.create(this.data.contact);
+      }else{
+        this.update(this.data.contact);
+      }
       this.onDismiss();
     }
 
   }
 
   private create(contact: Contact){
+    this.apiService.create(contact).subscribe(
+      (data) => {
+        this.modalService.openSnackbarSuccess("Contato criado com sucesso!");
+        setTimeout(() => {
+          location.reload();
+        },3000);
+      },
+      (error) => {
 
-    if(this.data.isNew){
-      this.apiService.create(contact).subscribe(
-        (data) => {
-          this.modalService.openSnackbarSuccess("Contato criado com sucesso!");
-          setTimeout(() => {
-            location.reload();
-          },3000);
-        },
-        (error) => {
-
-          console.log(error);
-          if(error.error.arguments.email){
-            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.email);
-          }else if(error.error.arguments.name){
-            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.name);
-          }else if(error.error.arguments.number){
-            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.number);
-          }else if(error.error.arguments.nickname){
-            this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.nickname);
-          }
-          else{
-            this.modalService.openSnackbarAlert("Não foi possível criar o contato!");
-          }
-
-          debugger;
-          setTimeout(() => {
-            location.reload();
-          },3000);
-
+        console.log(error);
+        if(error.error.arguments.email){
+          this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.email);
+        }else if(error.error.arguments.name){
+          this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.name);
+        }else if(error.error.arguments.number){
+          this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.number);
+        }else if(error.error.arguments.nickname){
+          this.modalService.openSnackbarAlert("Erro ao criar contato: " +  error.error.arguments.nickname);
         }
-      );
-    }else{
+        else{
+          this.modalService.openSnackbarAlert("Não foi possível criar o contato!");
+        }
+
+        setTimeout(() => {
+          location.reload();
+        },3000);
+
+      }
+    );
+
+  }
+
+  private update(contact: Contact){
+
+    if(contact.id){
       this.apiService.update(contact).subscribe(
         (data) => {
           this.modalService.openSnackbarSuccess("Contato atualizado com sucesso!");
@@ -130,8 +136,12 @@ export class CreateComponent{
           },3000);
         }
       );
+    }else{
+      this.modalService.openSnackbarAlert("Não foi possível atualizar o contato, inconsistência de dados!");
+      setTimeout(() => {
+        location.reload();
+      },3000);
     }
-
   }
 
   onDismiss(): void {

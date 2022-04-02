@@ -11,11 +11,9 @@
   <div class="row">
     <div class="col">
 
-      <div *ngIf="data.isNew" class="title">
-        Cadastro de novo contato
-      </div>
-      <div *ngIf="!data.isNew" class="title">
-        Editar contato
+      <div class="title">
+        <span *ngIf="data.isNew">Cadastro de novo contato</span>
+        <span *ngIf="!data.isNew">Editar contato</span>
       </div>
 
       <form class="example-form" ngNativeValidation>
@@ -74,11 +72,9 @@
           </div>
         </div>
 
-        <button *ngIf="data.isNew" (click)="validForm()" mat-raised-button color="primary">
-          Salvar
-        </button>
-        <button *ngIf="!data.isNew" (click)="validForm()" mat-raised-button color="primary">
-          Editar
+        <button (click)="validForm()" mat-raised-button color="primary">
+          <span *ngIf="data.isNew">Salvar</span>
+          <span *ngIf="!data.isNew">Editar</span>
         </button>
 
       </form>

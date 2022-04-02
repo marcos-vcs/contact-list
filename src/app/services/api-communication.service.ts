@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Contact, ContactWithId } from '../models/contact';
+import { Contact } from '../models/contact';
 
 interface ToSend{
+  id?: number;
   name?: string;
   email?: string;
   number?: string;
@@ -18,7 +19,7 @@ export class ApiCommunicationService {
 
   constructor(private http: HttpClient) { }
 
-  create(contact: Contact) : Observable<ContactWithId> {
+  create(contact: Contact) : Observable<Contact> {
 
     var toSend: ToSend = {
       name: contact.name,
@@ -39,12 +40,13 @@ export class ApiCommunicationService {
       delete toSend.nickname;
     }
 
-    return this.http.post<ContactWithId>(environment.apiUrl, toSend);
+    return this.http.post<Contact>(environment.apiUrl, toSend);
   }
 
-  update(contact: Contact) : Observable<ContactWithId> {
+  update(contact: Contact) : Observable<Contact> {
 
     var toSend: ToSend = {
+      id: contact.id,
       name: contact.name,
       email: contact.email,
       number: contact.number,
@@ -63,16 +65,16 @@ export class ApiCommunicationService {
       delete toSend.nickname;
     }
 
-    return this.http.put<ContactWithId>(`${environment.apiUrl}`, toSend);
+    return this.http.put<Contact>(`${environment.apiUrl}`, toSend);
   }
 
-  readWithFilter(filter: string, value: string) : Observable<ContactWithId[]> {
-    return this.http.get<ContactWithId[]>(
+  readWithFilter(filter: string, value: string) : Observable<Contact[]> {
+    return this.http.get<Contact[]>(
       `${environment.apiUrl}/filter?filterType=${filter}&filterValue=${value}`);
   }
 
-  read() : Observable<ContactWithId[]> {
-    return this.http.get<ContactWithId[]>(environment.apiUrl);
+  read() : Observable<Contact[]> {
+    return this.http.get<Contact[]>(environment.apiUrl);
   }
 
   delete(id: number){

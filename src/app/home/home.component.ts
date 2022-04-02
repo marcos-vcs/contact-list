@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { Contact, ContactWithId } from '../models/contact';
+import { Contact } from '../models/contact';
 import { ApiCommunicationService } from '../services/api-communication.service';
 import { OpenModalsService } from '../services/open-modals.service';
 
@@ -84,11 +84,17 @@ export class HomeComponent{
   }
 
   update(element: Contact){
-    this.modalService.openEditModal(element);
+
+    if(!element.id){
+      this.modalService.openSnackbarAlert('Contato não encontrado!');
+    }else{
+      this.modalService.openEditModal(element);
+    }
+
   }
 
-  delete(element: ContactWithId){
-    this.modalService.openDeleteModal(element.id);
+  delete(element: Contact){
+    this.modalService.openDeleteModal(Number(element.id));
   }
 
   activeFilterName(){
@@ -110,4 +116,4 @@ export class HomeComponent{
 
 }
 
-const ELEMENT_DATA: ContactWithId[] = [];
+const ELEMENT_DATA: Contact[] = [];
