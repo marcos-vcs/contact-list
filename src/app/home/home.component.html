@@ -9,10 +9,10 @@
 
             <button mat-raised-button class="ml-3" style="border-radius: 100px; margin-right: -30px;" [matMenuTriggerFor]="beforeMenu"><mat-icon>filter_list</mat-icon></button>
             <mat-menu #beforeMenu="matMenu" xPosition="before">
-              <button (click)="activeFilterName()" mat-menu-item>Nome (Padrão)</button>
-              <button (click)="activeFilterNickname()" mat-menu-item>Apelido</button>
-              <button (click)="activeFilterNumber()" mat-menu-item>Telefone</button>
-              <button (click)="activeFilterEmail()" mat-menu-item>E-mail</button>
+              <button [ngClass]="{'btn-active': activeFilter === 'NAME'}" (click)="activeFilterName()" mat-menu-item>Nome (Padrão)</button>
+              <button [ngClass]="{'btn-active': activeFilter === 'NICKNAME'}" (click)="activeFilterNickname()" mat-menu-item>Apelido</button>
+              <button [ngClass]="{'btn-active': activeFilter === 'NUMBER'}" (click)="activeFilterNumber()" mat-menu-item>Telefone</button>
+              <button [ngClass]="{'btn-active': activeFilter === 'EMAIL'}" (click)="activeFilterEmail()" mat-menu-item>E-mail</button>
             </mat-menu>
 
             <mat-form-field class="ml-5" style="width: 40%;">

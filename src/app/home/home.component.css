@@ -28,3 +28,12 @@ table tr:hover{
   font-weight: 600;
 }
 
+.btn-active{
+  background-color: #005ca7;
+  color: rgb(255, 255, 255);
+}
+.btn-active:hover{
+  background-color: #7a7a7a;
+  color: rgb(255, 255, 255);
+}
+

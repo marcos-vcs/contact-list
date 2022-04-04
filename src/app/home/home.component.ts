@@ -36,25 +36,32 @@ export class HomeComponent{
   }
 
   filter(){
-
-    if (this.search.length > 4) {
+    this.notfound = false;
+    if (this.search.length >= 2) {
       this.isLoad = true;
-      this.apiRequest.readWithFilter(this.activeFilter, this.search).subscribe(
+      this.apiRequest.readWithFilter(this.activeFilter, this.search.toLocaleUpperCase()).subscribe(
         (data) => {
           this.isLoad = false;
           this.dataSource.data = data;
           this.modalService.openSnackbarSuccess(
             'Contatos carregados com sucesso!'
           );
+          if(this.dataSource.data.length === 0){
+            this.notfound = true;
+          }
+
         },
         (error) => {
           console.log(error);
           this.isLoad = false;
-            this.modalService.openSnackbarAlert('Erro ao carregar contatos!');
+          this.modalService.openSnackbarAlert('Erro ao carregar contatos!');
+          if(this.dataSource.data.length === 0){
+            this.notfound = true;
+          }
         }
       );
     }else if(this.search.length  <= 4 && this.search.length !== 0){
-      this.modalService.openSnackbarAlert('Digite mais de 4 caracteres!');
+      this.modalService.openSnackbarAlert('Digite mais de 2 caracteres!');
     }else{
       this.read();
     }
